@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Sneaker store chat</title>
+<style>
+body{font-family:system-ui,sans-serif;max-width:640px;margin:0 auto;padding:12px;color:#222}
+h2{font-size:20px;margin:6px 0}
+#card{display:flex;gap:10px;align-items:center;border:1px solid #ddd;border-radius:8px;padding:8px;margin-bottom:8px}
+#card img{height:60px;border-radius:6px}
+#log{border:1px solid #ddd;border-radius:8px;padding:10px;height:38vh;min-height:220px;overflow-y:auto;background:#fafafa}
+.m{margin:8px 0;padding:8px 12px;border-radius:12px;max-width:88%;line-height:1.4}
+.u{background:#d9ecff;margin-left:auto}.b{background:#fff;border:1px solid #e3e3e3}
+#row{display:flex;gap:8px;margin-top:8px}input{flex:1;padding:10px;font-size:16px;min-width:0}
+button{padding:10px 14px;font-size:16px}.note{font-size:13px;color:#555}
+</style></head><body>
+<div id="card"><img id="pimg" src="product.jpg" alt="" onerror="this.style.display='none'"><div><b>UrbanFlex Sneakers</b><br>EUR 120<br><span class="note">You are interested in this model.</span></div></div>
+<h2>Chat with the store's chatbot</h2>
+<p>You are not sure yet how these sneakers <b>feel on the foot</b> and would like to know more. Ask the chatbot <b>3 to 5 questions</b> in your own words (you may also ask about anything else you care about). Press "Continue" when you are done.</p>
+<p class="note">The chatbot is an AI and can make mistakes. Please do not type personal information. Your messages are saved anonymously for research.</p>
+<div id="log"></div>
+<div id="row"><input id="in" maxlength="300" placeholder="Type your question..." autocomplete="off"><button id="send">Send</button></div>
+<p id="cnt" class="note"></p>
+<p><button id="go" disabled>Continue</button></p>
+<p class="note">Your code: <b id="code"></b>. You will be asked to enter it on the next page, so please keep it.</p>
+<script>
+const FORM_URL = "REPLACE_WITH_PART_2_GOOGLE_FORM_LINK";
+const p = new URLSearchParams(location.search);
+const c = Number(p.get('c'));
+let code = p.get('code') || Math.random().toString(36).slice(2,8).toUpperCase();
+document.getElementById('code').textContent = code;
+const log = document.getElementById('log'), input = document.getElementById('in'),
+      send = document.getElementById('send'), go = document.getElementById('go'), cnt = document.getElementById('cnt');
+let msgs = [], users = 0, busy = false;
+function add(role, text){const d=document.createElement('div');d.className='m '+(role==='user'?'u':'b');d.textContent=text;log.appendChild(d);log.scrollTop=log.scrollHeight;}
+function upd(){cnt.textContent=`Questions asked: ${users} of 5 (minimum 3)`;go.disabled=users<3;send.disabled=busy||users>=5;}
+async function sendMsg(){
+  const t=input.value.trim(); if(!t||busy||users>=5) return;
+  input.value=''; add('user',t); msgs.push({role:'user',content:t}); users++; busy=true; upd();
+  try{
+    const r=await fetch('/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({c,code,messages:msgs})});
+    const d=await r.json(); if(!r.ok) throw new Error(d.error);
+    add('bot',d.reply); msgs.push({role:'assistant',content:d.reply});
+  }catch(e){add('bot','Sorry, something went wrong. Please try your question again.'); msgs.pop(); users--;}
+  busy=false; upd(); input.focus();
+}
+send.onclick=sendMsg; input.onkeydown=e=>{if(e.key==='Enter')sendMsg();};
+go.onclick=()=>{location.href=FORM_URL;};
+if(![1,2,3].includes(c)){log.textContent='Invalid link. Please use the link from the survey.';send.disabled=true;input.disabled=true;} else upd();
+</script></body></html>
