@@ -1,0 +1,292 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Online sneaker store study</title>
+<meta name="description" content="A short, anonymous online study (about 10 minutes) on shopping for sneakers. Please open on your phone or computer.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Online sneaker store study">
+<meta property="og:image" content="https://sneaker-study.vercel.app/preview.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:description" content="A short, anonymous online study (about 10 minutes). Thank you for taking part!">
+<style>
+*{box-sizing:border-box}
+body{font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;max-width:680px;margin:0 auto;padding:14px 14px 60px;color:#222;line-height:1.45;background:#fff}
+h1{font-size:23px;margin:8px 0 12px}h2{font-size:20px;margin:6px 0 10px}
+p{margin:0 0 12px}.note{font-size:13px;color:#555}
+.step{display:none}.step.on{display:block}
+#prog{font-size:13px;color:#666;margin:0 0 6px}
+button{font-size:17px;padding:12px 20px;border-radius:10px;border:1px solid #888;background:#f2f2f2;cursor:pointer}
+button.primary{background:#1a73e8;border-color:#1a73e8;color:#fff}
+button:disabled{opacity:.45;cursor:default}
+.chk{display:flex;gap:10px;align-items:flex-start;margin:10px 0}.chk input{margin-top:5px;width:20px;height:20px;flex:none}
+img.lineup{width:100%;height:auto;border:1px solid #e3e3e3;border-radius:10px;margin:6px 0 14px}
+.q{border:1px solid #e3e3e3;border-radius:12px;padding:12px;margin:0 0 12px;background:#fff}
+.q.miss{border-color:#c62828;background:#fff6f6}
+.qt{font-weight:600;margin:0 0 8px;padding-right:18px}
+.q{position:relative}
+.q.rq:not(.nt)::after{content:"*";color:#d32f2f;position:absolute;top:8px;right:14px;font-weight:700;font-size:20px;line-height:1}
+.q.nt .ends span:first-child::after{content:" *";color:#d32f2f;font-weight:700}
+#pcard{display:flex;gap:14px;align-items:center;border:1px solid #ddd;border-radius:12px;padding:10px;margin:0 0 14px}#pcard img{width:110px;height:auto;border-radius:8px;background:#f2f2f2}
+.reqnote{font-size:14px;color:#555;margin:0 0 10px}.reqnote b{color:#d32f2f}
+.ends{display:flex;justify-content:space-between;gap:8px;font-size:14px;color:#333;margin-bottom:6px}
+.ends span{max-width:48%}.ends span:last-child{text-align:right}
+.sc{display:flex;gap:4px}
+.sc label{flex:1;text-align:center}
+.sc input{position:absolute;opacity:0;pointer-events:none}
+.sc span{display:block;padding:11px 0;border:1px solid #aaa;border-radius:8px;font-size:16px;background:#fafafa}
+.sc input:checked+span{background:#1a73e8;border-color:#1a73e8;color:#fff;font-weight:700}
+.opts label{display:flex;gap:10px;align-items:center;padding:9px 4px}.opts input{width:20px;height:20px}
+input[type=number],input[type=text],textarea,select{width:100%;font-size:17px;padding:10px;border:1px solid #999;border-radius:8px}
+#card{display:flex;gap:10px;align-items:center;border:1px solid #ddd;border-radius:8px;padding:8px;margin-bottom:8px}
+#log{border:1px solid #ddd;border-radius:8px;padding:10px;height:38vh;min-height:230px;overflow-y:auto;background:#fafafa}
+.m{margin:8px 0;padding:8px 12px;border-radius:12px;max-width:88%;line-height:1.4}
+.u{background:#d9ecff;margin-left:auto}.b{background:#fff;border:1px solid #e3e3e3}
+#row{display:flex;gap:8px;margin-top:8px;position:sticky;bottom:0;background:#fff;padding:8px 0 10px;z-index:5}#row input{flex:1;padding:10px;font-size:16px;min-width:0}
+#err,.err{color:#c62828;font-size:14px;min-height:18px;margin:6px 0}
+</style></head><body>
+<div id="prog"></div>
+
+<!-- 0 consent -->
+<div class="step" id="s0">
+  <h1>Online sneaker store study</h1>
+  <p>Thank you for participating. This survey is part of my personal research for my Master's thesis. You will look at an online sneaker store and chat with an AI chatbot about one product. It takes about 10 minutes. There are no right or wrong answers.</p>
+  <p>Participation is voluntary and your answers are anonymous. You can stop at any time by closing the page. Your answers and your chat messages are saved anonymously and used only for my thesis. The chat is powered by an AI service (OpenAI), so please do not type personal information in the chat. The chatbot is an AI and can make mistakes. The brand UrbanFlex and its product are fictional.</p>
+  <label class="chk"><input type="checkbox" id="c18"><span>I am 18 years or older.</span></label>
+  <label class="chk"><input type="checkbox" id="cagree"><span>I have read the information above and agree to take part.</span></label>
+  <p id="err0" class="err"></p>
+  <button class="primary" id="start" disabled>Start</button>
+</div>
+
+<!-- 1 store -->
+<div class="step" id="s1">
+  <h2>The store</h2>
+  <p>You have opened the website of an online sneaker store. This is what you see. A model from a brand you do not know yet has caught your eye: the UrbanFlex sneakers (marked in the picture). You have seen them on social media. The store offers a chat with a chatbot. On the next page you answer a few questions, and then you can ask the chatbot 3 to 5 questions about the sneakers.</p>
+  <img class="lineup" src="lineup.png" alt="Store page with six sneakers; the UrbanFlex Street Knit sneakers are marked as Your choice">
+  <button class="primary" id="to2">Continue</button>
+</div>
+
+<!-- 2 involvement -->
+<div class="step" id="s2">
+  <h2>Your view of the UrbanFlex sneakers</h2>
+  <div id="pcard"><img src="urbanflex.jpg" alt="UrbanFlex Street Knit sneaker"><div><b>UrbanFlex Street Knit</b><br>EUR 124.95<br><span class="note">Six colours · knit upper · platform sole</span></div></div>
+  <p>For me, the UrbanFlex sneakers are... <span class="note">(please rate each line from 1 to 7)</span></p><p class="reqnote"><b>*</b> = required</p>
+  <div id="invbox"></div>
+  <p class="err" id="err2"></p>
+  <button class="primary" id="to3">Continue</button>
+</div>
+
+<!-- 3 chat -->
+<div class="step" id="s3">
+  <div id="card"><div><b>UrbanFlex Sneakers</b><br>EUR 124.95<br><span class="note">You are interested in this model.</span></div></div>
+  <h2>Chat with the store's chatbot</h2>
+  <p>You are not sure yet how these sneakers <b>feel on the foot</b> and would like to know more. Ask the chatbot <b>3 to 5 questions</b> in your own words (you may also ask about anything else you care about). Press "Continue" when you are done.</p>
+  <p class="note">The chatbot is an AI and can make mistakes. Please do not type personal information. Your messages are saved anonymously for research.</p>
+  <div id="log"></div>
+  <div id="row"><input id="in" maxlength="300" placeholder="Type your question..." autocomplete="off"><button id="send">Send</button></div>
+  <p id="cnt" class="note"></p>
+  <p><button class="primary" id="to4" disabled>Continue</button></p>
+</div>
+
+<!-- 4 manipulation check -->
+<div class="step" id="s4">
+  <h2>The chatbot</h2>
+  <p>Please think about the chat you just had. How much do you agree with each statement?</p>
+  <p class="reqnote"><b>*</b> = required</p>
+  <div id="manbox"></div>
+  <p class="err" id="err4"></p>
+  <button class="primary" id="to5">Continue</button>
+</div>
+
+<!-- 5 outcomes -->
+<div class="step" id="s5">
+  <h2>Your impression</h2>
+  <p class="reqnote"><b>*</b> = required</p>
+  <div id="outbox"></div>
+  <p class="err" id="err5"></p>
+  <button class="primary" id="to6">Continue</button>
+</div>
+
+<!-- 6 about you -->
+<div class="step" id="s6">
+  <h2>About you</h2>
+  <p class="reqnote"><b>*</b> = required</p>
+  <div id="demobox"></div>
+  <p class="err" id="err6"></p>
+  <button class="primary" id="finish">Finish</button>
+</div>
+
+<!-- 7 thanks -->
+<div class="step" id="s7">
+  <h1>Thank you!</h1>
+  <p>Your answers have been saved. Thank you very much for taking part.</p>
+  <p>Please note: UrbanFlex is a fictional brand and the UrbanFlex sneakers do not exist. The store page, the UrbanFlex price and the chatbot's statements about the UrbanFlex were made up for this study. The other shoes in the picture are real products, shown with real shop prices. The chatbot was an AI, and its style of communication was varied on purpose.</p>
+  <p>You can now close this page.</p>
+</div>
+
+<script>
+const AGREE = ["Strongly disagree","Strongly agree"];
+// involvement: [key, left word, right word]; aff = affective, cog = cognitive
+const INV = [["inv_aff1","Boring","Interesting"],["inv_cog1","Unimportant","Important"],["inv_aff2","Unexciting","Exciting"],
+ ["inv_cog2","Irrelevant","Relevant"],["inv_aff3","Unappealing","Appealing"],["inv_cog3","Worthless","Valuable"],
+ ["inv_aff4","Mundane","Fascinating"],["inv_cog4","Means nothing to me","Means a lot to me"],
+ ["inv_aff5","Uninvolving","Involving"],["inv_cog5","Not needed","Needed"]];
+const MAN = [["man_fact1","The chatbot mainly gave me facts and figures about the sneakers."],
+ ["man_eval1","The chatbot mainly expressed its own opinions about the sneakers."],
+ ["man_fact2","The chatbot gave objective, measurable information."],
+ ["man_eval2","The chatbot expressed personal feelings and evaluations."],
+ ["attn","To show that you are reading carefully, please select 7 (Strongly agree) for this line."],
+ ["man_fact3","The chatbot described concrete product details (for example price, weight or materials)."],
+ ["man_eval3","The chatbot communicated in an enthusiastic, emotional way."]];
+const OUT_AGREE = [["chat_appropriate","The way the chatbot communicated was appropriate for this situation."],
+ ["chat_liking","I liked the way the chatbot communicated."],
+ ["chat_reuse","I would like to use a chatbot like this again when shopping online."]];
+const PI = [["pi1","The likelihood that I would buy the UrbanFlex sneakers is:","Unlikely","Likely"],
+ ["pi2","The probability that I would buy the UrbanFlex sneakers is:","Improbable","Probable"],
+ ["pi3","The possibility that I would buy the UrbanFlex sneakers is:","Impossible","Possible"],
+ ["inmarket","How likely is it that you will buy sneakers (of any brand) in the next 6 months?","Very unlikely","Very likely"]];
+
+const $ = id => document.getElementById(id);
+let S = {step:0, code:"", c:0, fallback:0, ans:{}, msgs:[], users:0, t:{}};
+try { const saved = JSON.parse(sessionStorage.getItem("st")||"null"); if (saved && saved.code) S = saved; } catch(e){}
+function save(){ try{ sessionStorage.setItem("st", JSON.stringify(S)); }catch(e){} }
+const now = () => new Date().toISOString();
+
+// ---------- rendering helpers ----------
+function scaleQ(key, title, left, right, opts){
+  const d = document.createElement("div"); d.className="q rq"+(title?"":" nt"); d.dataset.key=key;
+  let h = (title?'<div class="qt">'+title+'</div>':'')+'<div class="ends"><span>'+left+'</span><span>'+right+'</span></div><div class="sc">';
+  for(let i=1;i<=7;i++) h += '<label><input type="radio" name="'+key+'" value="'+i+'"><span>'+i+'</span></label>';
+  d.innerHTML = h+'</div>';
+  d.querySelectorAll("input").forEach(r=>{
+    if (S.ans[key]==r.value) r.checked=true;
+    r.onchange=()=>{ S.ans[key]=r.value; d.classList.remove("miss"); save(); };
+  });
+  return d;
+}
+function choiceQ(key, title, options){
+  const d = document.createElement("div"); d.className="q"+(/optional/.test(title)?"":" rq"); d.dataset.key=key;
+  let h = '<div class="qt">'+title+'</div><div class="opts">';
+  options.forEach(o=> h += '<label><input type="radio" name="'+key+'" value="'+o+'"><span>'+o+'</span></label>');
+  d.innerHTML = h+'</div>';
+  d.querySelectorAll("input").forEach(r=>{
+    if (S.ans[key]==r.value) r.checked=true;
+    r.onchange=()=>{ S.ans[key]=r.value; d.classList.remove("miss"); save(); };
+  });
+  return d;
+}
+function textQ(key, title, type, extra){
+  const d = document.createElement("div"); d.className="q"+(/optional/.test(title)?"":" rq"); d.dataset.key=key;
+  d.innerHTML = '<div class="qt">'+title+'</div>' + (type==="area" ? '<textarea rows="3" maxlength="500"></textarea>' : '<input type="'+type+'" '+(extra||"")+'>');
+  const f = d.querySelector("textarea,input"); if (S.ans[key]) f.value=S.ans[key];
+  f.oninput=()=>{ S.ans[key]=f.value; d.classList.remove("miss"); save(); };
+  return d;
+}
+function check(box, keys, errEl){
+  let first=null;
+  keys.forEach(k=>{
+    const q = box.querySelector('[data-key="'+k+'"]'); const v = S.ans[k];
+    const bad = v===undefined || String(v).trim()==="";
+    q.classList.toggle("miss", bad); if (bad && !first) first=q;
+  });
+  if (first){ $(errEl).textContent="Please answer all questions."; first.scrollIntoView({behavior:"smooth",block:"center"}); return false; }
+  $(errEl).textContent=""; return true;
+}
+
+// ---------- build pages ----------
+INV.forEach(([k,l,r])=> $("invbox").appendChild(scaleQ(k, "", l, r)));
+MAN.forEach(([k,t])=> $("manbox").appendChild(scaleQ(k, t, AGREE[0], AGREE[1])));
+OUT_AGREE.forEach(([k,t])=> $("outbox").appendChild(scaleQ(k, t, AGREE[0], AGREE[1])));
+PI.forEach(([k,t,l,r])=> $("outbox").appendChild(scaleQ(k, t, l, r)));
+$("demobox").appendChild(choiceQ("ai_use","How often do you use AI chatbots (for example ChatGPT)?",["Never","Less than once a month","About once a month","About once a week","Daily"]));
+$("demobox").appendChild(textQ("age","How old are you?","number",'min="18" max="99" inputmode="numeric"'));
+$("demobox").appendChild(choiceQ("gender","What is your gender?",["Female","Male","Diverse","Prefer not to say"]));
+$("demobox").appendChild(choiceQ("education","What is your highest completed education?",["School","Vocational training","Bachelor's degree","Master's degree","Doctorate","Other / prefer not to say"]));
+$("demobox").appendChild(textQ("odd","Did anything the chatbot said seem odd or pushy? (optional)","area"));
+$("demobox").appendChild(textQ("comment","Anything you would like to add? (optional)","area"));
+
+// ---------- navigation ----------
+const NSTEPS = 7;
+function show(n){
+  S.step=n; save();
+  document.querySelectorAll(".step").forEach(e=>e.classList.remove("on"));
+  $("s"+n).classList.add("on");
+  $("prog").textContent = n===0||n===7 ? "" : "Step "+n+" of 6";
+  window.scrollTo(0,0);
+}
+function mobile(){ return window.innerWidth<700 ? 1 : 0; }
+
+async function post(url, body){
+  const r = await fetch(url,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(body)});
+  const d = await r.json().catch(()=>({})); if(!r.ok) throw new Error(d.error||"error"); return d;
+}
+async function submitRow(sheet, headers, values){
+  for(let i=0;i<3;i++){ try{ await post("/api/submit",{sheet,headers,values}); return true; }catch(e){ await new Promise(r=>setTimeout(r,700)); } }
+  return false;
+}
+function baseCols(){ return [["code",S.code],["condition",S.c],["mobile",mobile()],["assign_fallback",S.fallback],["t_start",S.t.start||""],["t_inv_done",S.t.inv||""]]; }
+function invCols(){ return INV.map(([k])=>[k,S.ans[k]||""]); }
+
+// 0 consent
+function chk0(){ $("start").disabled = !($("c18").checked && $("cagree").checked); }
+$("c18").onchange=chk0; $("cagree").onchange=chk0;
+$("start").onclick=async()=>{
+  $("start").disabled=true; $("err0").textContent="";
+  try{
+    const d = await post("/api/assign",{});
+    S.c=d.c; S.code=d.code; S.fallback=d.fallback||0; S.t.start=now(); save(); show(1);
+  }catch(e){ $("err0").textContent="Could not start. Please check your connection and try again."; $("start").disabled=false; }
+};
+$("to2").onclick=()=>show(2);
+
+// 2 involvement
+$("to3").onclick=async()=>{
+  if(!check($("invbox"), INV.map(x=>x[0]), "err2")) return;
+  S.t.inv=now(); save();
+  const cols = baseCols().concat(invCols());
+  submitRow("Part1", cols.map(x=>x[0]), cols.map(x=>x[1]));   // early copy so partial data is kept
+  show(3); upd();
+};
+
+// 3 chat
+const log=$("log"), input=$("in"), send=$("send"), go=$("to4"), cnt=$("cnt");
+let busy=false;
+function add(role,text){const d=document.createElement("div");d.className="m "+(role==="user"?"u":"b");d.textContent=text;log.appendChild(d);log.scrollTop=log.scrollHeight;return d;}
+function upd(){cnt.textContent="Questions asked: "+S.users+" of 5 (minimum 3)";go.disabled=S.users<3;send.disabled=busy||S.users>=5;}
+S.msgs.forEach(m=>add(m.role==="user"?"user":"bot", m.content));
+async function sendMsg(){
+  const t=input.value.trim(); if(!t||busy||S.users>=5) return;
+  if(!S.t.chat) S.t.chat=now();
+  input.value=""; add("user",t); S.msgs.push({role:"user",content:t}); S.users++; busy=true; upd(); save();
+  const wait=add("bot","Typing...");
+  try{
+    const d=await post("/api/chat",{c:S.c,code:S.code,messages:S.msgs});
+    wait.remove(); add("bot",d.reply); S.msgs.push({role:"assistant",content:d.reply});
+  }catch(e){wait.remove(); add("bot","Sorry, something went wrong. Please try your question again."); S.msgs.pop(); S.users--;}
+  busy=false; upd(); save(); input.focus({preventScroll:true});
+}
+send.onclick=sendMsg; input.onkeydown=e=>{if(e.key==="Enter")sendMsg();};
+go.onclick=()=>{ S.t.chatEnd=now(); save(); show(4); };
+
+// 4-6 part 2
+$("to5").onclick=()=>{ if(check($("manbox"), MAN.map(x=>x[0]), "err4")) show(5); };
+$("to6").onclick=()=>{ if(check($("outbox"), OUT_AGREE.concat(PI).map(x=>x[0]), "err5")) show(6); };
+$("finish").onclick=async()=>{
+  if(!check($("demobox"), ["ai_use","age","gender","education"], "err6")) return;
+  const a=Number(S.ans.age); if(!(a>=18&&a<=99)){ $("err6").textContent="Please enter your age (18 to 99)."; return; }
+  $("finish").disabled=true; S.t.end=now(); save();
+  const cols = baseCols().concat([["t_chat_start",S.t.chat||""],["t_chat_end",S.t.chatEnd||""],["t_end",S.t.end],["chat_questions",S.users]])
+    .concat(invCols())
+    .concat(MAN.filter(x=>x[0]!=="attn").map(([k])=>[k,S.ans[k]||""]))
+    .concat([["attn_value",S.ans.attn||""],["attn_pass",S.ans.attn==="7"?1:0]])
+    .concat(OUT_AGREE.map(([k])=>[k,S.ans[k]||""])).concat(PI.map(([k])=>[k,S.ans[k]||""]))
+    .concat(["ai_use","age","gender","education","odd","comment"].map(k=>[k,S.ans[k]||""]));
+  const ok = await submitRow("Part2", cols.map(x=>x[0]), cols.map(x=>x[1]));
+  if(!ok){ $("err6").textContent="Your answers could not be saved. Please check your connection and press Finish again."; $("finish").disabled=false; return; }
+  try{ sessionStorage.removeItem("st"); }catch(e){}
+  show(7);
+};
+
+// ---------- start ----------
+if (S.code && S.step>0) { show(S.step); if(S.step===3) upd(); } else { show(0); chk0(); }
+</script></body></html>
